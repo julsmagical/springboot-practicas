@@ -1,6 +1,6 @@
 package com.example.springboot_demo.controllers;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springboot_demo.models.User;
 import com.example.springboot_demo.models.dto.UserDto;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController

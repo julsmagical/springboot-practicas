@@ -5,12 +5,18 @@ public class User {
     private String lastname;
     private String email;
     private int age;
+    private String phone;
 
     public User(String name, String lastname, String email, int age) {
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.age = age;
+    }
+
+    public User(String name, String lastname, String email, int age, String phone) {
+        this(name, lastname, email, age);
+        this.phone = phone;
     }
 
     public String getName() {
@@ -40,5 +46,13 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
