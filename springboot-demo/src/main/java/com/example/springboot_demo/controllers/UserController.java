@@ -38,5 +38,4 @@ public class UserController {
             new User("Juliet3", "Morales", "juliet3@gmail.com", 20));
         return users;
     }
-    
 }
