@@ -3,7 +3,6 @@ package com.springboot.di.app.springboot_di.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,8 @@ public class ProductService implements IProductService {
     private Environment env;
     private IProductRepository repository;
 
-    public ProductService(@Qualifier("productRepository") IProductRepository repository, Environment env) {
+    // quitar el qualifier para volver al original
+    public ProductService(@Qualifier("productJson") IProductRepository repository, Environment env) {
         this.repository = repository;
         this.env = env;
     }
