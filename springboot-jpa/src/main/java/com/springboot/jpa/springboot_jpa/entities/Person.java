@@ -1,6 +1,5 @@
 package com.springboot.jpa.springboot_jpa.entities;
 
-import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
