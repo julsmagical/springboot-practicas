@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import com.springboot.jpa.springboot_jpa.dto.PersonDto;
 import com.springboot.jpa.springboot_jpa.entities.Person;
 
 public interface IPersonRepository extends CrudRepository<Person, Long> {
@@ -49,4 +50,19 @@ public interface IPersonRepository extends CrudRepository<Person, Long> {
 
     @Query("SELECT new Person(p.name, p.lastname) FROM Person p")
     List<Person> findAllPersonalizedPerson();
+
+    // con DTO
+    @Query("SELECT new com.springboot.jpa.springboot_jpa.dto.PersonDto(p.name, p.lastname) FROM Person p")
+    List<PersonDto> findAllPersonDto();
+
+    // con distinct para evitar repeticion
+    @Query("SELECT DISTINCT (p.programmingLanguage) FROM Person p")
+    List<String> findAllProgrammingLanguage();
+
+    @Query("SELECT COUNT (DISTINCT(p.programmingLanguage)) FROM Person p")
+    Long countProgrammingLanguage();
+
+    // concat, upper, lower y like
+    @Query("SELECT DISTINCT UPPER(p.name || ' ' || p.lastname) FROM Person p")
+    List<String> findAllNames();
 }

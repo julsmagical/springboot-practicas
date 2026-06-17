@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.springboot.jpa.springboot_jpa.dto.PersonDto;
 import com.springboot.jpa.springboot_jpa.entities.Person;
 import com.springboot.jpa.springboot_jpa.repositories.IPersonRepository;
 
@@ -44,5 +45,27 @@ public class PersonalizedQueries {
         System.out.println("==== Consulta que puebla y devuelve objeto entity de una instancia personalizada ====");
         List<Person> persons = repository.findAllPersonalizedPerson();
         persons.forEach(System.out::println);
+
+        System.out.println("==== Consulta que puebla y devuelve un dto ====");
+        List<PersonDto> personsDto = repository.findAllPersonDto();
+        personsDto.forEach(System.out::println);
+    }
+
+    @Transactional(readOnly = true)
+    public void queriesDistint(){
+        System.out.println("==== Consulta con lenguages de programación ====");
+        List<String> language = repository.findAllProgrammingLanguage();
+        language.forEach(System.out::println);
+
+        System.out.println("==== Consulta con total de lenguages de programación ====");
+        Long totalLanguage = repository.countProgrammingLanguage();
+        System.out.println("Total de lenguajes de programación: " + totalLanguage);
+    }
+
+    @Transactional(readOnly = true)
+    public void personalizedFunctions(){
+        System.out.println("==== Consulta con nombres y funciones ====");
+        List<String> names = repository.findAllNames();
+        names.forEach(System.out::println);
     }
 }
