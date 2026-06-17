@@ -35,4 +35,18 @@ public interface IPersonRepository extends CrudRepository<Person, Long> {
 
     @Query("SELECT p.lastname, p.programmingLanguage FROM Person p WHERE p.programmingLanguage=?1 AND p.name=?2")
     List<Object[]> obtenerPersonData(String programmingLanguage, String name);
+
+    // Consultas personalizadas
+    @Query("SELECT CONCAT(p.name, ' ', p.lastname) AS fullname FROM Person p WHERE p.id=?1")
+    String getFullNameById(Long id);
+
+    //obtener un solo elementos por el id
+    @Query("SELECT p.id, p.name, p.lastname, p.programmingLanguage FROM Person p WHERE p.id=?1")
+    List<Object[]>  getFullObject(Long id);
+
+    @Query("SELECT p, p.programmingLanguage from Person p")
+    List<Object[]> getFullList();
+
+    @Query("SELECT new Person(p.name, p.lastname) FROM Person p")
+    List<Person> findAllPersonalizedPerson();
 }

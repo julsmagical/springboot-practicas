@@ -13,11 +13,13 @@ public class SpringbootJpaApplication implements CommandLineRunner{
 	private final IPersonRepository repository;
 	private final QueriesJPA queries;
 	private final CrudJPA crud;
+	private final PersonalizedQueries pqueries;
 
-	SpringbootJpaApplication(IPersonRepository repository, QueriesJPA queries, CrudJPA crud) {
+	SpringbootJpaApplication(IPersonRepository repository, QueriesJPA queries, CrudJPA crud, PersonalizedQueries pqueries) {
 		this.repository = repository;
 		this.queries = queries;
 		this.crud = crud;
+		this.pqueries = pqueries;
 	}
 
 	public static void main(String[] args) {
@@ -27,6 +29,8 @@ public class SpringbootJpaApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		//queries.list();
-		crud.update();
+		//crud.update();
+		pqueries.findFullObject();
+		//pqueries.findFullnameById();
 	}
 }
