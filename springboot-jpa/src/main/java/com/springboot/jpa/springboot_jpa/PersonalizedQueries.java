@@ -68,4 +68,15 @@ public class PersonalizedQueries {
         List<String> names = repository.findAllNames();
         names.forEach(System.out::println);
     }
+
+    @Transactional(readOnly = true)
+    public void personalizedBetween(){
+        System.out.println("==== Consulta por rangos ====");
+        List<Person> persons = repository.findIdBetween(2L, 5L);
+        persons.forEach(System.out::println);
+
+        System.out.println("==== Consulta por nombres ====");
+        List<Person> names = repository.findNameBetween("J", "P");
+        names.forEach(System.out::println);
+    }
 }

@@ -65,4 +65,14 @@ public interface IPersonRepository extends CrudRepository<Person, Long> {
     // concat, upper, lower y like
     @Query("SELECT DISTINCT UPPER(p.name || ' ' || p.lastname) FROM Person p")
     List<String> findAllNames();
+
+    // between
+    @Query("SELECT p FROM Person p WHERE p.id BETWEEN ?1 AND ?2")
+    List<Person> findIdBetween(Long id1, Long id2);
+
+    @Query("SELECT p FROM Person p WHERE p.name BETWEEN ?1 AND ?2 ORDER BY p.name")
+    List<Person> findNameBetween(String c1, String c2);
+
+    List<Person> findById(Long id1, Long id2);
+    List<Person> findByName(String name1, String name2);
 }
