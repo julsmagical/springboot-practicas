@@ -1,6 +1,7 @@
 package com.springboot.jpa.springboot_jpa;
 
 import java.util.List;
+//import java.util.Optional;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,12 +25,36 @@ public class SpringbootJpaApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		
-		// List<Person> persons = (List<Person>) repository.findAll();
-		
-		// List<Person> persons = (List<Person>) repository.findByProgrammingLanguage("Java");
-		List<Person> persons = (List<Person>) repository.buscarByProgrammingLanguage("Java", "Roe");
+		list();
+		//findOneName();
+	}
 
+	public void findOne(){
+		// Person person = null;
+		// Optional<Person> optionalPerson = repository.findById(1L);
+		// if(optionalPerson.isPresent()){
+		// 	person = optionalPerson.get();
+		// }
+		// System.out.println(person);
+
+		repository.findOne(1L).ifPresent(p -> System.out.println(p));
+	}
+
+	public void findOneName(){
+		//repository.findOneName("Jul").ifPresent(p -> System.out.println(p));
+		repository.findByNameContaining("Jul").ifPresent(p -> System.out.println(p));
+	}
+
+	public void list(){
+		// List<Person> persons = (List<Person>) repository.findAll();
+		List<Person> persons = (List<Person>) repository.findByProgrammingLanguage("Java");
+		// List<Person> persons = (List<Person>) repository.buscarByProgrammingLanguage("Java", "Roe");
 		persons.stream().forEach(person -> System.out.println(person));
+
+		// campos separados
+		List<Object[]> personValue = repository.obtenerPersonData("Java");
+		personValue.stream().forEach(person -> {
+			System.out.println(person[0] + " " + person[1] + " es experto en " + person[2]);
+		});
 	}
 }

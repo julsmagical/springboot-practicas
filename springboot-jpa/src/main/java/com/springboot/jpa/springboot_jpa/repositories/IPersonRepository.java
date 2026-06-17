@@ -1,6 +1,7 @@
 package com.springboot.jpa.springboot_jpa.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -8,8 +9,30 @@ import org.springframework.data.repository.CrudRepository;
 import com.springboot.jpa.springboot_jpa.entities.Person;
 
 public interface IPersonRepository extends CrudRepository<Person, Long> {
+    
+    // Obtener uno
+    @Query("SELECT p FROM Person p WHERE p.id=?1")
+    Optional<Person> findOne(Long id);
+
+    @Query("SELECT p FROM Person p WHERE p.name LIKE %?1%")
+    Optional<Person> findOneName(String name);
+
+    Optional<Person> findByNameContaining(String name);
+
+    // consultas JPA y personalizadas
     List<Person> findByProgrammingLanguage(String programmingLanguage);
 
-    @Query("select p from Person p where p.programmingLanguage=?1 and p.lastname=?2")
+    @Query("SELECT p FROM Person p WHERE p.programmingLanguage=?1 AND p.lastname=?2")
     List<Person> buscarByProgrammingLanguage(String programmingLanguage, String lastname);
+
+    // Obtener campos separados
+    @Query("SELECT p.name, p.programmingLanguage FROM Person p")
+    List<Object[]> obtenerPersonData();
+
+    // con busqueda parcial
+    @Query("SELECT p.name, p.lastname, p.programmingLanguage FROM Person p WHERE p.programmingLanguage LIKE %?1%")
+    List<Object[]> obtenerPersonData(String programmingLanguage);
+
+    @Query("SELECT p.lastname, p.programmingLanguage FROM Person p WHERE p.programmingLanguage=?1 AND p.name=?2")
+    List<Object[]> obtenerPersonData(String programmingLanguage, String name);
 }
