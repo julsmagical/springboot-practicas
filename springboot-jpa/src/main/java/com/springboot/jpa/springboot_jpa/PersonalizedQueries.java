@@ -1,6 +1,8 @@
 package com.springboot.jpa.springboot_jpa;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -102,5 +104,35 @@ public class PersonalizedQueries {
             Integer length = (Integer) reg[1];
             System.out.println("name=" + name + ", length=" + length);
         });
+
+        System.out.println("==== Resumen de consultas ====");
+        Object[] resume = (Object[]) repository.getAggregationFunctions();
+        System.out.println(
+            "min=" + resume[0] + 
+            ", max=" + resume[1] + 
+            ", sum=" + resume[2] + 
+            ", avg=" + resume[3] + 
+            ", count=" + resume[4]);
+    }
+
+    @Transactional(readOnly = true)
+    public void subQueries(){
+        System.out.println("==== Subconsulta nombre más corto y largo ====");
+        List<Object[]> regs = repository.getShorterName();
+        regs.forEach(reg -> {
+            String name = (String) reg[0];
+            Integer length = (Integer) reg[1];
+            System.out.println("name=" + name + ", length=" + length);
+        });
+        System.out.println("==== Subconsulta  para obtener ultimo registro ====");
+        Optional<Person> opPerson = repository.getLastRegistration();
+        opPerson.ifPresent(System.out::println);
+    }
+
+    @Transactional(readOnly = true)
+    public void whereIn(){
+        System.out.println("==== Consulta where in ====");
+        List<Person> persons = repository.getPersonsByIds(List.of(1L, 2L, 4L));
+        persons.forEach(System.out::println);
     }
 }

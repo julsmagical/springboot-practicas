@@ -88,4 +88,17 @@ public interface IPersonRepository extends CrudRepository<Person, Long> {
 
     @Query("SELECT p.name, LENGTH(p.name) FROM Person p")
     public List<Object[]> getNameLength();
+
+    @Query("SELECT MIN(p.id), MAX(p.id), SUM(p.id), AVG(LENGTH(p.name)), COUNT(p.id) FROM Person p")
+    public Object getAggregationFunctions();
+
+    @Query("SELECT p.name, LENGTH(p.name) FROM Person p WHERE LENGTH(p.name)=(SELECT MIN(LENGTH(p.name)) FROM Person p)")
+    public List<Object[]> getShorterName();
+
+    //ultimo registro
+    @Query("SELECT p FROM Person p WHERE p.id=(SELECT MAX(p.id) FROM Person p)")
+    public Optional<Person> getLastRegistration();
+
+    @Query("SELECT p FROM Person p WHERE p.id IN ?1")
+    public List<Person> getPersonsByIds(List<Long> ids);
 }

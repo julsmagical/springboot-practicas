@@ -30,7 +30,7 @@ public class SpringbootJpaApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		//queries.list();
 		//crud.update();
-		pqueries.functionAggregation();
+		pqueries.whereIn();
 		//pqueries.findFullnameById();
 	}
 }
