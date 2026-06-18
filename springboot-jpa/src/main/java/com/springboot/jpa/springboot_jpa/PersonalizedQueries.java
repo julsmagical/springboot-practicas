@@ -79,4 +79,28 @@ public class PersonalizedQueries {
         List<Person> names = repository.findNameBetween("J", "P");
         names.forEach(System.out::println);
     }
+
+    @Transactional(readOnly = true)
+    public void functionAggregation(){
+        System.out.println("==== Consulta con el total ====");
+        Long count = repository.totalPerson();
+        System.out.println(count);
+        System.out.println(count);
+
+        System.out.println("==== Consulta con el total ====");
+        Long min = repository.minId();
+        System.out.println(min);
+       
+        System.out.println("==== Consulta con el total ====");
+        Long max = repository.maxId(); 
+        System.out.println(max);
+
+        System.out.println("==== Consulta con el largo del nombre ====");
+        List<Object[]> regs = repository.getNameLength();
+        regs.forEach(reg -> {
+            String name = (String) reg[0];
+            Integer length = (Integer) reg[1];
+            System.out.println("name=" + name + ", length=" + length);
+        });
+    }
 }

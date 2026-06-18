@@ -70,9 +70,22 @@ public interface IPersonRepository extends CrudRepository<Person, Long> {
     @Query("SELECT p FROM Person p WHERE p.id BETWEEN ?1 AND ?2")
     List<Person> findIdBetween(Long id1, Long id2);
 
-    @Query("SELECT p FROM Person p WHERE p.name BETWEEN ?1 AND ?2 ORDER BY p.name")
+    @Query("SELECT p FROM Person p WHERE p.name BETWEEN ?1 AND ?2 ORDER BY p.name DESC")
     List<Person> findNameBetween(String c1, String c2);
 
     List<Person> findById(Long id1, Long id2);
     List<Person> findByName(String name1, String name2);
+
+    // jpql de agregación
+    @Query("SELECT COUNT(p) FROM Person p")
+    Long totalPerson();
+
+    @Query("SELECT MIN(p.id) FROM Person p")
+    Long minId();
+
+    @Query("SELECT MAX(p.id) FROM Person p")
+    Long maxId();
+
+    @Query("SELECT p.name, LENGTH(p.name) FROM Person p")
+    public List<Object[]> getNameLength();
 }
