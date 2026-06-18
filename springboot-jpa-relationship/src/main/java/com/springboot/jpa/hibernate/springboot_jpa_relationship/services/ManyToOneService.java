@@ -3,6 +3,7 @@ package com.springboot.jpa.hibernate.springboot_jpa_relationship.services;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.springboot.jpa.hibernate.springboot_jpa_relationship.entities.Client;
 import com.springboot.jpa.hibernate.springboot_jpa_relationship.entities.Invoice;
@@ -20,6 +21,7 @@ public class ManyToOneService {
         this.invoiceRepository = invoiceRepository;
     }
 
+    @Transactional
     public void createClient(){
         Client client = new Client("Juliet", "Morales");
         clientRepository.save(client);
@@ -30,6 +32,7 @@ public class ManyToOneService {
         System.out.println(invoiceDB);
     }
 
+    @Transactional
     public void findById(){
         Optional<Client> opClient = clientRepository.findById(2L);
 
