@@ -29,8 +29,9 @@ public class SpringbootJpaApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		//queries.list();
-		//crud.update();
-		pqueries.whereIn();
-		//pqueries.findFullnameById();
+		crud.create();
+		//pqueries.whereIn();
 	}
+
+
 }
